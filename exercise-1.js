@@ -135,7 +135,7 @@ const sumOfAges = people.reduce((acc, { age }) => acc + age, 0);
 console.log({ sumOfAges });
 
 // 5 - Return only dish names from recipes containing 5 or more ingredients
-const fiveOrMoreDishes = recipes.filter(recipe => recipe.ingredients.length >= 5);
+const fiveOrMoreDishes = recipes.filter(({ ingredients }) => ingredients.length >= 5).map(({ name }) => name);
 console.log({ fiveOrMoreDishes });
 
 // 6 - Return the recipe whose sum of the weight of the ingredients is the largest in the list
