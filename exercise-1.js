@@ -109,10 +109,60 @@ const recipes = [
 
 // FILTER, FILTER, MAP and REDUCE exercises
 // 1 - Only return people of even age
+const evenPeople = people.filter(({ age }) => age % 2 === 0);
+
+console.log({ evenPeople });
+
 // 2 - Return the person with exactly 45 years
+const oldPerson = people.find(({ age }) => age === 45);
+console.log({ oldPerson });
+
 // 3 - Return people with an additional "slug" field, which should contain a friendly url string with the username
+const slugify = function (text) {
+    return text.toString().toLowerCase()
+        .replace(/\s+/g, '-')           // Replace spaces with -
+        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+        .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+        .replace(/^-+/, '')             // Trim - from start of text
+        .replace(/-+$/, '');            // Trim - from end of text
+}
+
+const sluggedPeople = people.map(person => ({ ...person, slug: slugify(person.name) }));
+console.log({ sluggedPeople });
+
 // 4 - Return the sum of the ages
+const sumOfAges = people.reduce((acc, { age }) => acc + age, 0);
+console.log({ sumOfAges });
+
 // 5 - Return only dish names from recipes containing 5 or more ingredients
+const fiveOrMoreDishes = recipes.filter(({ ingredients }) => ingredients.length >= 5).map(({ name }) => name);
+console.log({ fiveOrMoreDishes });
+
 // 6 - Return the recipe whose sum of the weight of the ingredients is the largest in the list
+const heaviestRepice = recipes.map(recipe => ({
+    ...recipe,
+    weight: recipe.ingredients.reduce((acc, ingredient) => acc + ingredient.amount, 0)
+})).reduce((bigger, recipe) => {
+    if (bigger.weight > recipe.weight) {
+        return bigger;
+    }
+
+    return recipe;
+}, { weight: 0 });
+
+console.log({ heaviestRepice });
+
 // 7 - Return only a list of all ingredients of all recipes
+const ingredients = recipes
+    .map(recipe => recipe.ingredients.map(ingredient => ingredient.name))
+    .reduce((flatArray, array) => flatArray.concat(array), []);
+
+console.log({ ingredients });
+
 // 8 - Return the sum of the total weight of all ingredients of all recipes
+const totalWeight = recipes.map(recipe => ({
+    ...recipe,
+    weight: recipe.ingredients.reduce((acc, ingredient) => acc + ingredient.amount, 0)
+})).reduce((acc, recipe) => acc + recipe.weight, 0);
+
+console.log({ totalWeight });
