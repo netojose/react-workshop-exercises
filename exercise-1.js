@@ -109,8 +109,11 @@ const recipes = [
 
 // FILTER, FILTER, MAP and REDUCE exercises
 // 1 - Only return people of even age
+console.log(people.filter(p => p.age >  5));
 // 2 - Return the person with exactly 45 years
+console.log(people.find(p => p.age ===  5));
 // 3 - Return people with an additional "slug" field, which should contain a friendly url string with the username
+console.log(people.map(p => ({...p, 'slug': `http://xvideos.com/${p.name}`})));
 // 4 - Return the sum of the ages
 // 5 - Return only dish names from recipes containing 5 or more ingredients
 // 6 - Return the recipe whose sum of the weight of the ingredients is the largest in the list
