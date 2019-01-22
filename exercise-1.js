@@ -137,7 +137,7 @@ console.log(
 // 7 - Return only a list of all ingredients of all recipes
 console.log("Questão 7")
 console.log(
-    recipes.reduce((allIngredients, current) => {allIngredients.push(...current.ingredients); return allIngredients}, [])
+    recipes.reduce((allIngredients, current) => allIngredients.concat(...current.ingredients), [])
 );
 
 // 8 - Return the sum of the total weight of all ingredients of all recipes
