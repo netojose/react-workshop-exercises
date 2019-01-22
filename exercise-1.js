@@ -154,8 +154,7 @@ console.log({ heaviestRepice });
 
 // 7 - Return only a list of all ingredients of all recipes
 const ingredients = recipes
-    .map(recipe => recipe.ingredients)
-    .map(ingredients => ingredients.map(ingredient => ingredient.name))
+    .map(recipe => recipe.ingredients.map(ingredient => ingredient.name))
     .reduce((flatArray, array) => flatArray.concat(array), []);
 
 console.log({ ingredients });
