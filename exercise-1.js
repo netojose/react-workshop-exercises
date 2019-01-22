@@ -109,13 +109,39 @@ const recipes = [
 
 // FILTER, FILTER, MAP and REDUCE exercises
 // 1 - Only return people of even age
+console.log("Questão 1")
 console.log(people.filter(p => p.age >  5));
 // 2 - Return the person with exactly 45 years
+console.log("Questão 2")
 console.log(people.find(p => p.age ===  5));
 // 3 - Return people with an additional "slug" field, which should contain a friendly url string with the username
+console.log("Questão 3")
 console.log(people.map(p => ({...p, 'slug': `http://xvideos.com/${p.name}`})));
 // 4 - Return the sum of the ages
+console.log("Questão 4")
+console.log(people.reduce((a, b) => a + b.age, 0));
 // 5 - Return only dish names from recipes containing 5 or more ingredients
+console.log("Questão 5")
+console.log(recipes.filter(r => r.ingredients.length >= 5).map(r => r.name));
 // 6 - Return the recipe whose sum of the weight of the ingredients is the largest in the list
+console.log("Questão 6")
+console.log(
+    
+    recipes.reduce((greatest, curr) => {
+        const currAmount = curr.ingredients.reduce((total, item) => total + item.amount, 0);
+        if( currAmount > greatest.amount)
+            return {recipe: curr, amount: currAmount};
+        return greatest;
+    }, { amount: 0})
+);
 // 7 - Return only a list of all ingredients of all recipes
+console.log("Questão 7")
+console.log(
+    recipes.reduce((allIngredients, current) => {allIngredients.push(...current.ingredients); return allIngredients}, [])
+);
+
 // 8 - Return the sum of the total weight of all ingredients of all recipes
+console.log("Questão 8")
+console.log(
+    recipes.reduce((allIngredients, curr) => allIngredients + curr.ingredients.reduce((total, item) => total + item.amount, 0), 0)
+);
