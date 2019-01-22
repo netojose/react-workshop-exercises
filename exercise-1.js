@@ -145,9 +145,9 @@ const heaviestRepice = recipes.map(recipe => ({
 })).reduce((bigger, recipe) => {
     if (bigger.weight > recipe.weight) {
         return bigger;
-    } else {
-        return recipe;
     }
+
+    return recipe;
 }, { weight: 0 });
 
 console.log({ heaviestRepice });
