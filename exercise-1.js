@@ -106,13 +106,64 @@ const recipes = [
         ]
     }
 ]
-
 // FILTER, FILTER, MAP and REDUCE exercises
+
 // 1 - Only return people of even age
+console.log(EvenAge)
+const EvenAge = people.filter(p => {
+    if( (p.age % 2) === 0) 
+        return p
+})
+console.log('EvenAge: ')
+
+
 // 2 - Return the person with exactly 45 years
+console.log('ExactAge: ')
+const ExactAge = people.filter( p => (p.age == 45)  )
+console.log(ExactAge)
+
 // 3 - Return people with an additional "slug" field, which should contain a friendly url string with the username
+console.log('FriendlyField: ')
+const newPeople = people.map( p => ({...p, slug: "www.friendlyurl.com/"+ p.name }) )
+console.log(newPeople)
+
 // 4 - Return the sum of the ages
+console.log('SumOfAges: ')
+const sumOfAges = people.reduce((acc, curr) => acc += curr.age, 0)
+console.log(sumOfAges)
+
 // 5 - Return only dish names from recipes containing 5 or more ingredients
+console.log('MoreIngredients: ')
+const moreIngred = recipes.filter(item => item.ingredients.length >= 5)
+console.log(moreIngred)
+
 // 6 - Return the recipe whose sum of the weight of the ingredients is the largest in the list
+console.log('MaxWeight: ')
+recipes.reduce( (max, curr, index) =>{
+    
+    currAmount = curr.ingredients.reduce((acc, curr) => acc += curr.amount, 0)
+    
+    if(max < currAmount){
+        max = currAmount
+        maxIndex = index
+    }
+
+}, 0) 
+console.log(recipes[maxIndex])
+
+
 // 7 - Return only a list of all ingredients of all recipes
+console.log('Ingredients list: ')
+const ingredients = recipes.reduce( (array, curr) => { 
+
+    array.push( curr.ingredients.map(ingred => ingred) ) 
+
+}, [] )
+console.log(ingredients)
+
 // 8 - Return the sum of the total weight of all ingredients of all recipes
+console.log("SumOfStuff")
+const SumOfStuff = recipes.reduce( (acc, curr) => {
+    acc.push( { Recipe: curr.name,  Amount: curr.ingredients.reduce( (acc, curr) => acc += curr.Amount, 0) } )
+}, [])
+
